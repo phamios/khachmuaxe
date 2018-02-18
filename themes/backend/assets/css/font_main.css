@@ -1,0 +1,15 @@
+@font-face {
+  font-family: 'MyWebFont';
+  src: url('helveticaneue.ttf')  format('truetype'),
+  url('helveticaneuebold.ttf')  format('truetype'),
+  url('helveticaneuecondensedblack.ttf')  format('truetype'),
+  url('helveticaneuecondensedbold.ttf')  format('truetype'),
+  url('helveticaneueitalic.ttf')  format('truetype'),
+  url('helveticaneuelight.ttf')  format('truetype'),
+  url('helveticaneuelightitalic.ttf')  format('truetype'),
+  url('helveticaneuemedium.ttf')  format('truetype'),
+  url('helveticaneueultralight.ttf')  format('truetype'),
+  url('helveticaneueultralightitalic.ttf')  format('truetype'),
+  url('helveticaneuebolditalic.ttf')  format('truetype'); /* Safari, Android, iOS */
+       /* url('webfont.svg#svgFontName') format('svg'); /* Legacy iOS */ */
+}
