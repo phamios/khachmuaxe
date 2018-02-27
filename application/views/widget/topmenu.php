@@ -13,12 +13,11 @@
     <div class="navbar-header pull-left">
       <a href="<?php echo site_url('admincp/index');?>" class="navbar-brand">
         <small>
-          <i class="fa fa-leaf"></i>
-          Quản lý chung
+          <img src="<?php echo base_url('uploads/logo-png-full.png');?>" width="3%" alt=""/>
         </small>
       </a>
     </div>
 
-     
+
   </div><!-- /.navbar-container -->
 </div>

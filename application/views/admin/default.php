@@ -4,10 +4,11 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 		<meta charset="utf-8" />
 		<title>Quản lý chung</title>
-
+		<link rel="stylesheet" href="<?php echo base_url('themes/backend');?>/style.css" />
 		<meta name="description" content="overview &amp; stats" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-
+		<link rel="icon" type="image/png" href="<?php echo base_url('uploads/logo-png-full.png');?>" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.5.1/chosen.min.css">
 		<!-- bootstrap & fontawesome -->
 		<link rel="stylesheet" href="<?php echo base_url('themes/backend');?>/assets/css/bootstrap.min.css" />
 		<link rel="stylesheet" href="<?php echo base_url('themes/backend');?>/assets/font-awesome/4.5.0/css/font-awesome.min.css" />
@@ -43,8 +44,10 @@
 		<![endif]-->
 
 		<!--[if !IE]> -->
-		<script src="<?php echo base_url('themes/backend');?>/assets/js/jquery-2.1.4.min.js"></script>
 
+		<script src="<?php echo base_url('themes/backend');?>/assets/js/jquery-2.1.4.min.js"></script>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+ 		<script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.5.1/chosen.jquery.min.js"></script>
 		<!-- <![endif]-->
 
 		<!--[if IE]>
@@ -67,7 +70,7 @@
 			<?php endif;?>
 			<!-- Nhân viên quản lý  -->
 			<?php if($this->session->userdata('admin_type') == 2):?>
-			<?php $this->load->view('widget/menu');?>
+			<?php $this->load->view('widget/menu/modemenu');?>
 			<?php endif;?>
 
 			<!-- Admin chính  -->
@@ -79,23 +82,47 @@
 
 			<div class="main-content">
 				<div class="main-content-inner">
-				  <?php $this->load->view("widget/breadcrumb");?>
-
 					<?php if ($this->router->fetch_method() == "index"): ?>
 							<?php $this->load->view("admin/main");?>
+					<?php endif; ?>
+					<?php if ($this->router->fetch_method() == "info"): ?>
+							<?php $this->load->view("admin/user/info");?>
 					<?php endif; ?>
 					<?php if ($this->router->fetch_method() == "listuser"): ?>
 							<?php $this->load->view("admin/listuser");?>
 					<?php endif; ?>
+					<?php if ($this->router->fetch_method() == "listusermoderator"): ?>
+							<?php $this->load->view("admin/user/listusermoderator");?>
+					<?php endif; ?>
+
 					<?php if ($this->router->fetch_method() == "customers"): ?>
 							<?php $this->load->view("admin/customers");?>
 					<?php endif; ?>
 					<?php if ($this->router->fetch_method() == "addUser"): ?>
 							<?php $this->load->view("admin/user/add");?>
 					<?php endif; ?>
-
-
-
+					<?php if ($this->router->fetch_method() == "leadconfig"): ?>
+							<?php $this->load->view("admin/config/leadconfig");?>
+					<?php endif; ?>
+					<?php if ($this->router->fetch_method() == "importExcel"): ?>
+							<?php $this->load->view("admin/importExcel");?>
+					<?php endif; ?>
+					<?php if ($this->router->fetch_method() == "listnote"): ?>
+							<?php $this->load->view("admin/listnote");?>
+					<?php endif; ?>
+					<?php if ($this->router->fetch_method() == "edituserinfo"): ?>
+							<?php $this->load->view("admin/user/edit");?>
+					<?php endif; ?>
+					<?php if ($this->router->fetch_method() == "editcustomer"): ?>
+							<?php $this->load->view("admin/customer/edit");?>
+					<?php endif; ?>
+					<?php if ($this->router->fetch_method() == "paymenthistory"): ?>
+							<?php $this->load->view("admin/customer/paymenthistory");?>
+					<?php endif; ?>
+					<?php if ($this->router->fetch_method() == "transaction"): ?>
+							<?php $this->load->view("admin/transaction");?>
+					<?php endif; ?>
+ 
 				</div>
 			</div><!-- /.main-content -->
 

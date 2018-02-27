@@ -27,7 +27,7 @@
         </li>
 
         <li class="">
-          <a href="#">
+          <a href="<?php echo site_url('admincp/importExcel');?>">
             <i class="menu-icon fa fa-caret-right"></i>
             Nạp từ excel
           </a>
@@ -50,7 +50,15 @@
         <li class="">
           <a href="<?php echo site_url('admincp/listuser');?>">
             <i class="menu-icon fa fa-caret-right"></i>
-            Danh sách User
+            Danh sách Member
+          </a>
+
+          <b class="arrow"></b>
+        </li>
+        <li class="">
+          <a href="<?php echo site_url('admincp/listusermoderator');?>">
+            <i class="menu-icon fa fa-caret-right"></i>
+            D/S Quản trị viên
           </a>
 
           <b class="arrow"></b>
@@ -69,14 +77,48 @@
     </li>
 
     <li class="">
-      <a href="#">
-        <i class="menu-icon fa fa-list-alt"></i>
-        <span class="menu-text"> Widgets </span>
+      <a href="#" class="dropdown-toggle">
+        <i class="menu-icon fa fa-list"></i>
+        <span class="menu-text"> Báo cáo </span>
+        <b class="arrow fa fa-angle-down"></b>
       </a>
-
       <b class="arrow"></b>
+      <ul class="submenu">
+        <li class="">
+          <a href="<?php echo site_url('admincp/transaction');?>">
+            <i class="menu-icon fa fa-caret-right"></i>
+            Lịch sử giao dịch
+          </a>
+
+          <b class="arrow"></b>
+        </li>
+
+
+      </ul>
     </li>
 
+
+
+    <li class="">
+      <a href="#" class="dropdown-toggle">
+        <i class="menu-icon fa fa-list"></i>
+        <span class="menu-text"> Cấu hình </span>
+        <b class="arrow fa fa-angle-down"></b>
+      </a>
+      <b class="arrow"></b>
+      <ul class="submenu">
+        <li class="">
+          <a href="<?php echo site_url('admincp/leadconfig');?>">
+            <i class="menu-icon fa fa-caret-right"></i>
+            Cấu hình LEAD
+          </a>
+
+          <b class="arrow"></b>
+        </li>
+
+
+      </ul>
+    </li>
 
 
     <li class="">

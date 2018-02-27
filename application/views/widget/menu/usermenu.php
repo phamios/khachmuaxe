@@ -1,7 +1,7 @@
 <div id="sidebar" class="sidebar responsive ace-save-state">
   <ul class="nav nav-list">
     <li >
-      <a href="<?php echo site_url("admincp/index");?>">
+      <a href="<?php echo site_url("admincp/customers");?>">
         <i class="menu-icon fa fa-tachometer"></i>
         <span class="menu-text"> Màn hình chính </span>
       </a>
@@ -10,7 +10,7 @@
     </li>
 
     <li class="active">
-      <a href="#" class="dropdown-toggle">
+      <a href="#" class="dropdown-toggle active">
         <i class="menu-icon fa fa-list"></i>
         <span class="menu-text"> Thông tin </span>
         <b class="arrow fa fa-angle-down"></b>

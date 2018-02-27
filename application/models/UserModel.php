@@ -9,7 +9,7 @@ date_default_timezone_set('Asia/Bangkok');
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-class UserModel extends CI_Model {
+class Usermodel extends CI_Model {
     var $table = "tblUser";
     function __construct() {
         parent::__construct();
@@ -30,14 +30,19 @@ class UserModel extends CI_Model {
     }
 
     public function getUsers($usertype = null){
-        if($usertype <> 0 ){
+        if($usertype == 3 ){
             $query = $this->db->query("
-                     Select tblMember.*,tblUser.username, tblUser.userpass from tblMember
+                     Select tblMember.*,tblUser.username, tblUser.userpass,tblUser.usertype from tblMember
                      LEFT Join tblUser ON tblMember.userid = tblUser.id WHERE tblUser.usertype = ".$usertype);
-        } else {
+        } else if($usertype == 1 ){
             $query = $this->db->query("
-                     Select tblMember.*,tblUser.username, tblUser.userpass from tblMember
-                     LEFT Join tblUser ON tblMember.userid = tblUser.id
+                     Select tblMember.*,tblUser.username, tblUser.userpass, tblUser.usertype from tblMember
+                     LEFT Join tblUser ON tblMember.userid = tblUser.id WHERE tblUser.usertype in (1,2)
+                  ");
+        }else {
+            $query = $this->db->query("
+                     Select tblMember.*,tblUser.username, tblUser.userpass, tblUser.usertype from tblMember
+                     LEFT Join tblUser ON tblMember.userid = tblUser.id WHERE tblUser.usertype in (2,3)
                   ");
         }
       if ($query->num_rows() > 0) {
@@ -46,6 +51,31 @@ class UserModel extends CI_Model {
           return 0;
       }
     }
+
+public function getuserinfo($userid = null){
+    $query = $this->db->query("
+             Select tblMember.*,tblUser.username, tblUser.userpass, tblUser.usertype from tblMember
+             LEFT Join tblUser ON tblMember.userid = tblUser.id WHERE tblUser.id = ".$userid);
+    if ($query->num_rows() > 0) {
+        return $query->result();
+    } else {
+        return 0;
+    }
+}
+
+public function searchUser($content=null,$userid=null){
+      if($userid <> null){
+          $query = $this->db->query("select * from tblMember where memberid = '".$userid."' phonenumber like '%".$content."%' or fullname like '%".$content."%' or demand like '%".$content."%'");
+      } else {
+          $query = $this->db->query("Select tblMember.*,tblUser.username, tblUser.userpass,tblUser.usertype from tblMember
+                     LEFT Join tblUser ON tblMember.userid = tblUser.id WHERE tblMember.memberphone like '%".$content."%' or tblMember.fullname like '%".$content."%' or tblMember.memberemail like '%".$content."%' or tblMember.showroom like '%".$content."%'");
+      }
+      if($query->num_rows() > 0){
+          return $query->result();
+      } else {
+          return null;
+      }
+  }
 
 
 
@@ -117,6 +147,7 @@ class UserModel extends CI_Model {
     public function insertUser($usertype=null,$username=null,$userpass=null,
         $fullname=null,$memberphone=null,$memberemail=null,$showroom=null,$memberaddress=null,$lead = 0,$balance = 0)
     {
+
         if($this->checkExitUser($username) == 1){
             $datauser = array(
                 'username'=>$username,
@@ -125,29 +156,59 @@ class UserModel extends CI_Model {
                 'status'=>1,
                 'createdate'=>date('d-m-Y h:i:sa')
             );
-            $this->db->insert($this->table,$data);
+            $this->db->insert($this->table,$datauser);
             $userid = $this->db->insert_id();
 
-            if($usertype == 3){
-
-            }
-            $data = array(
-                'username'=>$username,
-                'userpass'=>$userpass,
-                'useremail'=>$useremail,
-                'userphone'=>$userphone,
-                'usericon'=>$usericon,
-                'usertype'=>$usertype,
-                'usergender'=>$usergender,
+            $datamember = array(
+                'fullname'=>$fullname,
+                'memberphone'=>$memberphone,
+                'memberemail'=>$memberemail,
+                'showroom'=>$showroom,
+                'memberaddress'=>$memberaddress,
+                'lead'=>$lead,
+                'status'=>1,
+                'balance'=>$balance,
+                'userid'=>$userid,
+                'createdate'=>date('d-m-Y h:i:sa')
             );
-            $this->db->insert($this->table,$data);
+            $this->db->insert("tblMember",$datamember);
             $id = $this->db->insert_id();
             $this->db->trans_complete();
+
             return $id;
+
         }else{
             return 0;
         }
     }
+
+
+    public function updateUser($userid =null,$username=null,$userpass=null)
+    {
+      $this->db->where('id',$userid);
+      $datauser = array(
+          'username'=>$username,
+          'userpass'=>$userpass,
+      );
+      $this->db->update($this->table,$datauser);
+      return $userid;
+    }
+
+    public function updateMember($userid =null,$fullname=null,$memberphone=null,
+    $memberemail=null,$showroom=null,$memberaddress=null){
+        $datamember = array(
+            'fullname'=>$fullname,
+            'memberphone'=>$memberphone,
+            'memberemail'=>$memberemail,
+            'showroom'=>$showroom,
+            'memberaddress'=>$memberaddress,
+        );
+        $this->db->where('userid',$userid);
+        $this->db->update("tblMember",$datamember);
+        return $userid;
+    }
+
+
 
     /**
      * @param  $username
@@ -169,16 +230,20 @@ class UserModel extends CI_Model {
      * @param   $type = 1 : Add
      *          $type = 2 : Sub
      */
-    public function updateBalance($userid=null,$number=null,$type=null){
-        $currentBalance = $this->getCurrentBalance($userid);
-        $this->db->where('id',$userid);
-        if($type = 1){
-            $data = array('userbalance'=>$currentBalance + $number);
-        } else {
-            $data = array('userbalance'=>$currentBalance - $number);
-        }
-        $this->db->update($this->table,$data);
-    }
+     public function updateBalance($userid=null,$amount=null,$count=null){
+       $currentBalance =$this->getBalance($userid);
+       $totalbalance = $this->getBalanceSummary($userid);
+       $amountlead = $this->getLeadPrice() * $count;
+       $this->db->where('userid',$userid);
+       if($count <> null){
+           $data = array('balance'=>$currentBalance - $amountlead);
+       }else{
+           $data = array(
+               'balance'=>$currentBalance + $amount,
+               'balancesummary'=>$totalbalance + $amount);
+       }
+       $this->db->update("tblMember",$data);
+   }
 
     /**
      * @param  $userid
@@ -195,6 +260,14 @@ class UserModel extends CI_Model {
             return 0;
         }
     }
+
+
+
+    public function delete($userid = null) {
+          $this->db->delete($this->table, array('id' => $userid));
+          $this->db->delete("tblMember", array('userid' => $userid));
+          $this->db->delete("tblCustomerInfo", array('memberid' => $userid));
+      }
 
 
 

@@ -42,7 +42,7 @@
 					<div class="col-sm-10 col-sm-offset-1">
 						<div class="login-container">
 							<div class="center">
-
+								<img src="<?php echo base_url('uploads/logo-png-full.png');?>" width="80%" alt=""/>
 								<h4 class="blue" id="id-company-text">&copy; Khachmuaxe</h4>
 							</div>
 
@@ -54,7 +54,7 @@
 										<div class="widget-main">
 											<h4 class="header blue lighter bigger">
 												<i class="ace-icon fa fa-coffee green"></i>
-												Please Enter Your Information
+											 Nhập thông tin đăng nhập
 											</h4>
 
 											<div class="space-6"></div>
@@ -63,14 +63,14 @@
 												<fieldset>
 													<label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="text" class="form-control" name="usernamelogin" placeholder="Username" />
+															<input type="text" class="form-control" name="usernamelogin" placeholder="Tên đăng nhập" />
 															<i class="ace-icon fa fa-user"></i>
 														</span>
 													</label>
 
 													<label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="password" class="form-control" name="passwordlogin" placeholder="Password" />
+															<input type="password" class="form-control" name="passwordlogin" placeholder="Mật khẩu" />
 															<i class="ace-icon fa fa-lock"></i>
 														</span>
 													</label>
@@ -78,14 +78,14 @@
 													<div class="space"></div>
 
 													<div class="clearfix">
-														<label class="inline">
+														<!-- <label class="inline">
 															<input type="checkbox" class="ace" />
 															<span class="lbl"> Remember Me</span>
-														</label>
+														</label> -->
 
 														<button type="submit" name="loginBtt" class="width-35 pull-right btn btn-sm btn-primary">
 															<i class="ace-icon fa fa-key"></i>
-															<span class="bigger-110">Login</span>
+															<span class="bigger-110">Đăng nhập</span>
 														</button>
 													</div>
 
@@ -95,21 +95,21 @@
 
 										</div><!-- /.widget-main -->
 
-										<div class="toolbar clearfix">
+										<!-- <div class="toolbar clearfix">
 											<div>
 												<a href="#" data-target="#forgot-box" class="forgot-password-link">
 													<i class="ace-icon fa fa-arrow-left"></i>
-													Forgot my password
+													Quển mật khẩu
 												</a>
 											</div>
 
 											<div>
 												<a href="#" data-target="#signup-box" class="user-signup-link">
-													Register
+													Đăng ký
 													<i class="ace-icon fa fa-arrow-right"></i>
 												</a>
 											</div>
-										</div>
+										</div> -->
 									</div><!-- /.widget-body -->
 								</div><!-- /.login-box -->
 

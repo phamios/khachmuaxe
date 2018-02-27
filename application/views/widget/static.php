@@ -21,10 +21,39 @@
       </div>
 
       <div class="infobox-data">
-        <div class="infobox-content">Earnings</div>
-        <div class="infobox-content">$32,000</div>
+        <div class="infobox-content">Thành viên</div>
+        <div class="infobox-content">
+          <?php echo number_format($TotalMember);?>
+        </div>
       </div>
     </div>
+    <div class="infobox infobox-blue infobox-small infobox-dark">
+      <div class="infobox-chart">
+        <span class="sparkline" data-values="3,4,2,3,4,4,2,2"></span>
+      </div>
+
+      <div class="infobox-data">
+        <div class="infobox-content">User</div>
+        <div class="infobox-content">
+          <?php echo number_format($TotalMember);?>
+        </div>
+      </div>
+    </div>
+
+    <div class="infobox infobox-blue infobox-small infobox-dark">
+      <div class="infobox-chart">
+        <span class="sparkline" data-values="1,2,3,3,4,4,6,5"></span>
+      </div>
+
+      <div class="infobox-data">
+        <div class="infobox-content">Deposit</div>
+        <div class="infobox-content">
+          <?php echo number_format($totalMoneyDeposit);?>
+        </div>
+      </div>
+    </div>
+
+
 
     <div class="infobox infobox-grey infobox-small infobox-dark">
       <div class="infobox-icon">
@@ -32,12 +61,12 @@
       </div>
 
       <div class="infobox-data">
-        <div class="infobox-content">Downloads</div>
-        <div class="infobox-content">1,205</div>
+        <div class="infobox-content">KH</div>
+        <div class="infobox-content"><?php echo $totalresource?></div>
       </div>
     </div>
   </div>
 
   <div class="vspace-12-sm"></div>
 
-</div> 
+</div>

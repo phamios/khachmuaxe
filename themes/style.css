@@ -1,0 +1,8 @@
+@font-face {
+    font-family: redsunbot;
+    src: url(font/icielpanton-light.woff);
+}
+
+body {
+    font-family: redsunbot;
+}
